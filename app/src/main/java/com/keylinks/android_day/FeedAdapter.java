@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+
 
 class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedHolder> {
 
@@ -22,17 +23,15 @@ class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedHolder> {
     @Override
     public void onBindViewHolder(@NonNull FeedHolder feedHolder, int i) {
         //用户头像
-        Picasso.with(feedHolder.itemView.getContext())
+        Glide.with(feedHolder.itemView.getContext())
                 .load(getAvatarResId(i))
-                .centerInside()
-                .fit()
+
                 .into(feedHolder.mIvAvatar);
 
         //内容图片
-        Picasso.with(feedHolder.itemView.getContext())
+        Glide.with(feedHolder.itemView.getContext())
                 .load(getContentResId(i))
-                .centerInside()
-                .fit()
+
                 .into(feedHolder.mIvContent);
 
         //nickname
