@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,PatchActivity.class);
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(intent);
 
 

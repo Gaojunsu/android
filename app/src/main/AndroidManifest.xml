@@ -24,6 +24,7 @@
         <activity android:name="com.keylinks.android.HomeActivity"/>
         <activity android:name="com.keylinks.android.PlayActivity"/>
         <activity android:name="com.keylinks.android.PatchActivity"/>
+        <activity android:name=".LoginActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
