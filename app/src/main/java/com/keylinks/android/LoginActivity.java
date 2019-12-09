@@ -2,83 +2,50 @@ package com.keylinks.android;
 
 
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.keylinks.android.annotation.ClickBehavior;
-import com.keylinks.android.db.DBOperation;
+import com.keylinks.android.base.BasePersenter;
+import com.keylinks.android.base.BaseView;
+import com.keylinks.android.bean.BaseEntity;
+import com.keylinks.android.bean.UserInfo;
+import com.keylinks.android.login.LoginContract;
+import com.keylinks.android.login.LoginPresenter;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 
-public class LoginActivity  extends AppCompatActivity implements DBOperation{
+public class LoginActivity  extends BaseView<LoginPresenter, LoginContract.View> {
 
-    private DBOperation db;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        db= (DBOperation) Proxy.newProxyInstance(DBOperation.class.getClassLoader(),new Class[]{DBOperation.class},new DBHander(this));
-        jump();
     }
+
+
+
+    // 点击事件
+    public void doLoginAction() {
+
+        // 发起需求，让Presenter处理
+            p.getContract().requestLogin("name", "password");
+
+    }
+
 
     @Override
-    public void insert() {
-        Log.i("proxy","insert");
-    }
+    public LoginContract.View getContract() {
+        return new LoginContract.View<UserInfo>() {
 
-    @Override
-    public void delete() {
-        Log.i("proxy","delete");
-    }
+            @Override
+            public void handler(UserInfo userInfo) {
 
-    @Override
-    public void serach() {
-        Log.i("proxy","serach");
-    }
-
-    @Override
-    public void upload() {
-        Log.i("proxy","upload");
-    }
-
-    @Override
-    public void save() {
-        Log.i("proxy","save");
-    }
-
-
-    class DBHander implements InvocationHandler {
-
-
-        private DBOperation db;
-
-        public DBHander(DBOperation db) {
-
-            this.db=db;
-        }
-
-         @Override
-         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
-
-            if (db!=null){
-                save();
-                return method.invoke(db,args);
             }
+        };
+    }
 
-             return null;
-         }
-     }
-    @ClickBehavior("面向切面编程")
-     private void jump(){
-
-        db.delete();
-
-     }
-
-
+    @Override
+    public LoginPresenter getPresenter() {
+        return new LoginPresenter();
+    }
 }

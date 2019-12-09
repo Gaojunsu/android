@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.keylinks.android.annotation.LoginBehavior;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -85,14 +86,18 @@ public class MainActivity extends AppCompatActivity {
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
-
-
+                jump();
             }
         });
 
     }
+
+    @LoginBehavior
+    private void jump(){
+        Intent intent = new Intent(MainActivity.this,PlayActivity.class);
+        startActivity(intent);
+    }
+
 
     private void immersive() {
 
