@@ -64,4 +64,6 @@ dependencies {
     }
 
     implementation 'org.aspectj:aspectjrt:1.8.13'
+
+    implementation project(':skin')
 }

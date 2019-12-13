@@ -5,4 +5,11 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhiteBg">#ffffff</color>
     <color name="colorGrayBg">#f4f4f4</color>
+
+
+    <!-- 本地/内置换肤颜色（日间） -->
+    <color name="commonTextColor">#008577</color>
+    <color name="commonTextColor1">#ffffff</color>
+    <color name="commonTextColor2">#B32121</color>
+
 </resources>
