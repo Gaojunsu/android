@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.os.Build;
 
 import android.os.Bundle;
-
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
         //滚动监听
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 //获取悬浮条的高度
                 mSuspensionBarHeight = mSuspensionBar.getHeight();
             }
 
             @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 //对悬浮条的位置进行调整
                 //找到下一个itemView

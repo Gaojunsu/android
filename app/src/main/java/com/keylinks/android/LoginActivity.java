@@ -4,8 +4,6 @@ package com.keylinks.android;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-
 
 import com.keylinks.android.base.BasePersenter;
 import com.keylinks.android.base.BaseView;
@@ -20,7 +18,7 @@ public class LoginActivity  extends BaseView<LoginPresenter, LoginContract.View>
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }

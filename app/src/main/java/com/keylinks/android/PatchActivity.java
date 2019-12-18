@@ -7,8 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -32,7 +30,7 @@ public class PatchActivity extends AppCompatActivity implements SimpleCallback {
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patch);
         //当前版本大与6.0
@@ -133,7 +131,7 @@ public class PatchActivity extends AppCompatActivity implements SimpleCallback {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,String[] permissions,int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PermissionManager.handleResult(this, requestCode, permissions, grantResults);
     }

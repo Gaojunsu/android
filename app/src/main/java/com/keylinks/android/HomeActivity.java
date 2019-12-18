@@ -2,8 +2,7 @@ package com.keylinks.android;
 
 import android.os.Bundle;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -43,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         init();
@@ -59,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         recycledViewPool.setMaxRecycledViews(0,10);
         BaseDelegeteAdapter bannerAdapter = new BaseDelegeteAdapter(this, new LinearLayoutHelper(), R.layout.vlayout_banner, 1) {
             @Override
-            public void onBindViewHolder(@NonNull BaseViewHolder baseViewHolder, int i) {
+            public void onBindViewHolder(BaseViewHolder baseViewHolder, int i) {
 
                 ArrayList<String> arrayList = new ArrayList<>();
                 arrayList.add("http://dn.dengpaoedu.com/examples/glide/1.jpg");
@@ -110,7 +109,7 @@ public class HomeActivity extends AppCompatActivity {
         BaseDelegeteAdapter menuAdapter = new BaseDelegeteAdapter(this, gridLayoutHelper, R.layout.vlayout_menu, 10) {
 
             @Override
-            public void onBindViewHolder(@NonNull BaseViewHolder baseViewHolder, final int position) {
+            public void onBindViewHolder(BaseViewHolder baseViewHolder, final int position) {
                 baseViewHolder.setText(R.id.tv_menu_title_home, ITEM_NAMES[position] + "");
                 baseViewHolder.setImageResource(R.id.iv_menu_home, IMG_URLS[position]);
                 baseViewHolder.getView(R.id.ll_menu_home).setOnClickListener(new View.OnClickListener() {
@@ -127,7 +126,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
             @Override
-            public void onBindViewHolder(@NonNull BaseViewHolder baseViewHolder, int i) {
+            public void onBindViewHolder(BaseViewHolder baseViewHolder, int i) {
                 MarqueeView marqueeView1 = baseViewHolder.getView(R.id.marqueeView1);
                 MarqueeView marqueeView2 = baseViewHolder.getView(R.id.marqueeView2);
 
@@ -178,7 +177,7 @@ public class HomeActivity extends AppCompatActivity {
                     R.layout.vlayout_grid, 4){
 
                 @Override
-                public void onBindViewHolder(@NonNull BaseViewHolder holder, final int position) {
+                public void onBindViewHolder(BaseViewHolder holder, final int position) {
                     int item = GRID_URL[position];
                     ImageView iv = holder.getView(R.id.iv);
                     Glide.with(getApplicationContext()).load(item).into(iv);
