@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 
-import com.keylinks.android.PlayActivity;
 import com.keylinks.android.model.MusicData;
 
 import java.util.ArrayList;

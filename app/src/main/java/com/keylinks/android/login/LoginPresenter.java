@@ -1,9 +1,7 @@
 package com.keylinks.android.login;
 
 import com.keylinks.android.LoginActivity;
-import com.keylinks.android.base.BaseModel;
 import com.keylinks.android.base.BasePersenter;
-import com.keylinks.android.bean.BaseEntity;
 import com.keylinks.android.bean.UserInfo;
 
 public class LoginPresenter extends BasePersenter<LoginActivity,LoginModel,LoginContract.Presenter> {

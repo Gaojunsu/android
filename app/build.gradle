@@ -1,17 +1,24 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-aspectjx'
 
-
-
+def rootAndroidId = rootProject.ext.androidId
+def appId = rootProject.ext.appId
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootAndroidId.compileSdkVersion
     defaultConfig {
-        applicationId "com.keylinks.android"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        applicationId appId.app
+        minSdkVersion rootAndroidId.minSdkVersion
+        targetSdkVersion rootAndroidId.targetSdkVersion
+        versionCode rootAndroidId.versionCode
+        versionName rootAndroidId.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+        // 这个方法接收三个非空的参数，第一个：确定值的类型，第二个：指定key的名字，第三个：传值（必须是String）
+        // 为什么需要定义这个？因为src代码中有可能需要用到跨模块交互，如果是组件化模块显然不行
+        // 切记：不能在android根节点，只能在defaultConfig或buildTypes节点下
+        buildConfigField("boolean", "isRelease", String.valueOf(isRelease))
+
         //指定源文件编译方式及配置编译选项
         externalNativeBuild{
             cmake {
@@ -63,5 +70,12 @@ dependencies {
 
     implementation 'org.aspectj:aspectjrt:1.8.13'
     implementation project(':skin')
+
+
+    // 如果是集成化模式，做发布版本时。各个模块都不能独立运行了
+    if(isRelease){
+        implementation project(':order')
+        implementation project(':personal')
+    }
 
 }

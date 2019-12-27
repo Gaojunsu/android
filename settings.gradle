@@ -1,1 +1,1 @@
-include ':app',':skin','skin_package'
+include ':app',':skin', ':common', ':order', ':personal', ':arouter_compiler','skin_package','arouter_annotation'

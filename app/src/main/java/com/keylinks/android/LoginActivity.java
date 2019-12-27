@@ -5,9 +5,7 @@ package com.keylinks.android;
 
 import android.os.Bundle;
 
-import com.keylinks.android.base.BasePersenter;
 import com.keylinks.android.base.BaseView;
-import com.keylinks.android.bean.BaseEntity;
 import com.keylinks.android.bean.UserInfo;
 import com.keylinks.android.login.LoginContract;
 import com.keylinks.android.login.LoginPresenter;

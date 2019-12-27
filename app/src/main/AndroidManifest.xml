@@ -8,7 +8,7 @@
 
 
     <application
-        android:name=".application.SkinApplication"
+        android:name=".order.application.SkinApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
         android:supportsRtl="true"
 
         android:theme="@style/AppTheme">
-        <activity android:name="com.keylinks.android.TestActivity"
+        <activity android:name=".order.TestActivity"
             android:configChanges="uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,10 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.keylinks.android.HomeActivity"/>
-        <activity android:name="com.keylinks.android.MainActivity"/>
-        <activity android:name="com.keylinks.android.PatchActivity"/>
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".order.HomeActivity"/>
+        <activity android:name=".order.MainActivity"/>
+        <activity android:name=".order.PatchActivity"/>
+        <activity android:name=".order.LoginActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
