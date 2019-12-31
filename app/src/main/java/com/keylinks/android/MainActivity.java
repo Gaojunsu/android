@@ -20,9 +20,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.keylinks.android.annotation.LoginBehavior;
+import com.keylinks.android.api.ParameterManager;
+import com.keylinks.android.api.RouterManager;
+import com.keylinks.android.arouter.annotation.ARouter;
 
 
-
+@ARouter(path = "/app/MainActivity")
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private FeedAdapter mFeedAdapter;
@@ -36,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // 懒加载方式，跳到哪加载哪个类
+        ParameterManager.getInstance().loadParameter(this);
         immersive();
         setHeightAndPadding(this,findViewById(R.id.toolbar));
         mSuspensionBar = findViewById(R.id.suspension_bar);
@@ -95,8 +99,12 @@ public class MainActivity extends AppCompatActivity {
 
     @LoginBehavior
     private void jump(){
-        Intent intent = new Intent(MainActivity.this,PlayActivity.class);
-        startActivity(intent);
+
+        RouterManager.getInstance()
+                .build("/app/PlayActivity")
+                .withResultString("call", "I'am comeback!")
+                .navigation(MainActivity.this);
+
     }
 
 

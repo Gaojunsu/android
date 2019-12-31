@@ -147,7 +147,7 @@
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:background="@color/skin_item_color"
-            android:onClick="jumpSelf"
+            android:id="@+id/jump"
             android:text="跳转"
             android:textColor="@color/skin_textColor" />
 

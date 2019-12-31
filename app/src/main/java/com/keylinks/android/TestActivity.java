@@ -9,10 +9,14 @@ import android.util.Log;
 import android.view.View;
 
 
+import com.keylinks.android.api.ParameterManager;
+import com.keylinks.android.api.RouterManager;
+import com.keylinks.android.arouter.annotation.ARouter;
 import com.keylinks.android.utils.PreferencesUtils;
 
 import java.io.File;
 
+@ARouter(path = "/app/TestActivity")
 public class TestActivity extends SkinActivity {
     private String skinPath;
 
@@ -20,6 +24,11 @@ public class TestActivity extends SkinActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
+
+        // 懒加载方式，跳到哪加载哪个类
+        ParameterManager.getInstance().loadParameter(this);
+
         findViewById(R.id.skinDynamic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +46,17 @@ public class TestActivity extends SkinActivity {
         // File.separator含义：拼接 /
         skinPath = Environment.getExternalStorageDirectory().getAbsolutePath()
                 + File.separator + "net163.skin";
+
+
+        findViewById(R.id.jump).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RouterManager.getInstance()
+                        .build("/app/MainActivity")
+                        .withResultString("call", "I'am comeback!")
+                        .navigation(TestActivity.this);
+            }
+        });
 
 
         Log.w("Skin",skinPath);

@@ -22,7 +22,7 @@ public class Constants {
     // RouterManager类名
     public static final String ROUTER_MANAGER = "RouterManager";
     // 包名前缀封装
-    public static final String BASE_PACKAGE = "com.keylinks.android.arouter.api";
+    public static final String BASE_PACKAGE = "com.keylinks.android.api";
     // 路由组Group加载接口
     public static final String AROUTE_GROUP = BASE_PACKAGE + ".core.ARouterLoadGroup";
     // 路由组Group对应的详细Path加载接口
