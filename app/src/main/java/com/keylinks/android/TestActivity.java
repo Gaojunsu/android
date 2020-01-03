@@ -7,14 +7,21 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 
 import com.keylinks.android.api.ParameterManager;
 import com.keylinks.android.api.RouterManager;
 import com.keylinks.android.arouter.annotation.ARouter;
+import com.keylinks.android.http.RetrofitManager;
+import com.keylinks.android.rxjava.RxJavaManager;
 import com.keylinks.android.utils.PreferencesUtils;
 
 import java.io.File;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 @ARouter(path = "/app/TestActivity")
 public class TestActivity extends SkinActivity {
@@ -26,8 +33,37 @@ public class TestActivity extends SkinActivity {
         setContentView(R.layout.activity_test);
 
 
+
+
+
         // 懒加载方式，跳到哪加载哪个类
         ParameterManager.getInstance().loadParameter(this);
+
+        final Button internet = findViewById(R.id.internet);
+        internet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<RetrofitManager.AndroidAPI.APIToken> login = RetrofitManager.getInstance().login("", "");
+                login.enqueue(new Callback<RetrofitManager.AndroidAPI.APIToken>() {
+                    @Override
+                    public void onResponse(Call<RetrofitManager.AndroidAPI.APIToken> call, Response<RetrofitManager.AndroidAPI.APIToken> response) {
+                                if (response.isSuccessful()){
+                                    internet.setText(response.body().user_email);
+                                    Log.w("retrofit",response.body().user_email);
+                                }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RetrofitManager.AndroidAPI.APIToken> call, Throwable t) {
+                        internet.setText(t.toString());
+                        Log.w("retrofit",t.toString());
+                    }
+                });
+
+
+            }
+        });
+
 
         findViewById(R.id.skinDynamic).setOnClickListener(new View.OnClickListener() {
             @Override
