@@ -160,6 +160,18 @@
             android:text="网路"
             android:textColor="@color/skin_textColor" />
 
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/skin_item_color"
+            android:id="@+id/internet1"
+            android:text="网路1"
+            android:textColor="@color/skin_textColor" />
+
+
         <!-- 测试自定义控件换肤 -->
         <com.keylinks.android.ui.CustomCircleView
             android:layout_width="50dp"

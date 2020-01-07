@@ -2,6 +2,7 @@ package com.keylinks.android;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,15 +19,21 @@ import com.keylinks.android.rxjava.RxJavaManager;
 import com.keylinks.android.utils.PreferencesUtils;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 @ARouter(path = "/app/TestActivity")
 public class TestActivity extends SkinActivity {
     private String skinPath;
-
+    private Button internet,internet1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,27 +46,57 @@ public class TestActivity extends SkinActivity {
         // 懒加载方式，跳到哪加载哪个类
         ParameterManager.getInstance().loadParameter(this);
 
-        final Button internet = findViewById(R.id.internet);
+        internet = findViewById(R.id.internet);
+        internet1 = findViewById(R.id.internet1);
+
+        internet1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                RetrofitManager.getInstance();
+
+                Call<ResponseBody> index = RetrofitManager.getInstance().index();
+                index.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                            if (response.isSuccessful()){
+                                try {
+                                    Log.w("Retrofit",response.body().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.w("Retrofit",t.toString());
+                    }
+                });
+            }
+        });
+
+
         internet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<RetrofitManager.AndroidAPI.APIToken> login = RetrofitManager.getInstance().login("", "");
-                login.enqueue(new Callback<RetrofitManager.AndroidAPI.APIToken>() {
+
+                Call<RetrofitManager.AndroidAPI.APIToken> hanb = RetrofitManager.getInstance().login("hanb", "12345");
+                hanb.enqueue(new Callback<RetrofitManager.AndroidAPI.APIToken>() {
                     @Override
-                    public void onResponse(Call<RetrofitManager.AndroidAPI.APIToken> call, Response<RetrofitManager.AndroidAPI.APIToken> response) {
+                    public void onResponse(Call<RetrofitManager.AndroidAPI.APIToken> call, retrofit2.Response<RetrofitManager.AndroidAPI.APIToken> response) {
                                 if (response.isSuccessful()){
-                                    internet.setText(response.body().user_email);
-                                    Log.w("retrofit",response.body().user_email);
+                                        Log.w("Retrofit",response.body().token);
                                 }
                     }
 
                     @Override
                     public void onFailure(Call<RetrofitManager.AndroidAPI.APIToken> call, Throwable t) {
-                        internet.setText(t.toString());
-                        Log.w("retrofit",t.toString());
+                        Log.w("Retrofit",t.toString());
                     }
                 });
-
 
             }
         });
@@ -147,4 +184,32 @@ public class TestActivity extends SkinActivity {
     protected boolean openChangeSkin() {
         return true;
     }
+
+
+
+    private class TestTask  extends AsyncTask<Void,Response,Response>{
+
+
+        @Override
+        protected void onPreExecute() {
+            Log.w("Retrofit","开始");
+        }
+
+        @Override
+        protected Response doInBackground(Void... voids) {
+
+
+
+
+
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Response result) {
+               internet.setText(result.body().toString());
+        }
+    }
+
 }
